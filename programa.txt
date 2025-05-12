@@ -1,0 +1,6 @@
+INICIAR
+x = 10
+SI x > 5 {
+    IMPRIMIR(x)
+}
+FIN_SI
