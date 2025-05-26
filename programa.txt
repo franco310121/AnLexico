@@ -1,6 +1,6 @@
-INICIAR
-x = 10
-SI x > 5 {
-    IMPRIMIR(x)
-}
-FIN_SI
+START
+var x = 10;
+si x > 5
+  out "mayor";
+endsi
+END
