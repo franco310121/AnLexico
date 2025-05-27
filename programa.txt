@@ -1,4 +1,5 @@
 START
+//Comentario
 var x = 10;
 si x > 5
   out "mayor";
