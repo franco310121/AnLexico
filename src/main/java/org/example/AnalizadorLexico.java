@@ -77,7 +77,7 @@ public class AnalizadorLexico {
 
                 if (lexema.startsWith("\"")) {
                     if (lexema.length() < 2 || !lexema.endsWith("\"")) {
-                        tokens.add(new TokenDetectado("ERROR", lexema, numLinea, columna, indice));
+                        tokens.add(new TokenDetectado("ERROR", "Cadena mal formada (debe comenzar y terminar con comillas).", numLinea, columna, indice));
                     } else {
                         tokens.add(new TokenDetectado("LIT_STR", lexema, numLinea, columna, indice));
                     }
@@ -99,17 +99,17 @@ public class AnalizadorLexico {
                 }
                 else if (lexema.matches("[0-9]+[a-zA-Z_]+") || lexema.matches("[0-9]+\\.[0-9]+[a-zA-Z_]+")) {
                     // número seguido de letras = error léxico
-                    tokens.add(new TokenDetectado("ERROR", lexema, numLinea, columna, indice));
+                    tokens.add(new TokenDetectado("ERROR", "Número seguido de letras, no válido: " + lexema, numLinea, columna, indice));
                 }
                 else if (lexema.matches("[{}();,+\\-*/=><!]")) {
                     Token t = tablaTokens.get(lexema);
                     if (t != null)
                         tokens.add(new TokenDetectado(t.getCategoria(), t.getComponente(), numLinea, columna, indice));
                     else
-                        tokens.add(new TokenDetectado("ERROR", lexema, numLinea, columna, indice));
+                        tokens.add(new TokenDetectado("ERROR", "Operador no reconocido: " + lexema, numLinea, columna, indice));
                 }
                 else {
-                    tokens.add(new TokenDetectado("ERROR", lexema, numLinea, columna, indice));
+                    tokens.add(new TokenDetectado("ERROR", "Token no reconocido: " + lexema, numLinea, columna, indice));
                 }
             }
             indiceGlobal += linea.length() + 1;
@@ -118,7 +118,4 @@ public class AnalizadorLexico {
 
         return tokens;
     }
-
-
-
 }
